@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# Amplify Studio Tutorial - Notes App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Public Link
+
+https://main.d25bu5dkmb3gkw.amplifyapp.com/
+
+## Source
+Course Title: Full Stack for Front-End Developers: Build your first AWS Amplify and React App
+Link: https://amplify.aws/learn/courses/Fullstack-for-Frontend-Developers-e7319
 
 ## Available Scripts
 
