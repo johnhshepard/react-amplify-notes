@@ -1,8 +1,12 @@
 import './App.css';
-import { CreateNote, NavBar, NoteUICollection, UpdateNote } from './ui-components';
+import { CreateNote, NavBar, NoteUICollection, UpdateNote, NoteCreateForm } from './ui-components';
 import { useState } from 'react'
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import { DataStore } from 'aws-amplify';
+import { DataStore } from 'aws-amplify'; 
+
+const withAuthenticatorOptions = {
+  hideSignUp: true
+}
 
 function App({ signOut }) {
   const [showCreateModal, setShowCreateModal] = useState(false)
@@ -20,10 +24,12 @@ function App({ signOut }) {
             onClick: async () => {
               await DataStore.clear()
               signOut()
-            }
-          }
+            }}
         }}
         />
+      <div className='container'>
+        <NoteCreateForm />
+      </div> 
       <div className='container'>
       <NoteUICollection overrideItems={({ item, idx }) => {
         return {
@@ -39,9 +45,17 @@ function App({ signOut }) {
         }
       }}
       />
-      </div>   
+      </div>
+      {/* // TODO - Form needs to hide after submit
+      // TODO - User needs a notifcation that the submit was successful.
+    // TODO - Form needs to be cleared of data on launch.  
+    // TODO - Private Authorization doesn't work correctly.
+    */ }
       <div className='modal' style={{display: showCreateModal === false && 'none'}}>
         <CreateNote 
+          onSuccess={() => {
+            setShowCreateModal(false)
+          }}
           overrides={{
             MyIcon: {
               as: 'button',
@@ -65,4 +79,4 @@ function App({ signOut }) {
   );
 }
 
-export default withAuthenticator(App);
+export default withAuthenticator(App, withAuthenticatorOptions);

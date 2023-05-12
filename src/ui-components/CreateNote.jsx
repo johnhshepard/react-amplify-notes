@@ -6,32 +6,10 @@
 
 /* eslint-disable */
 import * as React from "react";
-import {
-  getOverrideProps,
-  useDataStoreCreateAction,
-  useStateMutationAction,
-} from "@aws-amplify/ui-react/internal";
-import { Note } from "../models";
-import { schema } from "../models/schema";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Button, Divider, Flex, Icon, TextField } from "@aws-amplify/ui-react";
 export default function CreateNote(props) {
   const { overrides, ...rest } = props;
-  const [
-    textFieldThreeOneSixZeroTwoFourEightFiveValue,
-    setTextFieldThreeOneSixZeroTwoFourEightFiveValue,
-  ] = useStateMutationAction("");
-  const [
-    textFieldThreeOneSixZeroTwoFourEightSixValue,
-    setTextFieldThreeOneSixZeroTwoFourEightSixValue,
-  ] = useStateMutationAction("");
-  const buttonOnClick = useDataStoreCreateAction({
-    model: Note,
-    fields: {
-      title: textFieldThreeOneSixZeroTwoFourEightFiveValue,
-      text: textFieldThreeOneSixZeroTwoFourEightSixValue,
-    },
-    schema: schema,
-  });
   return (
     <Flex
       gap="16px"
@@ -101,12 +79,6 @@ export default function CreateNote(props) {
           isDisabled={false}
           labelHidden={false}
           variation="default"
-          value={textFieldThreeOneSixZeroTwoFourEightFiveValue}
-          onChange={(event) => {
-            setTextFieldThreeOneSixZeroTwoFourEightFiveValue(
-              event.target.value
-            );
-          }}
           {...getOverrideProps(overrides, "TextField31602485")}
         ></TextField>
         <TextField
@@ -118,10 +90,6 @@ export default function CreateNote(props) {
           isDisabled={false}
           labelHidden={false}
           variation="default"
-          value={textFieldThreeOneSixZeroTwoFourEightSixValue}
-          onChange={(event) => {
-            setTextFieldThreeOneSixZeroTwoFourEightSixValue(event.target.value);
-          }}
           {...getOverrideProps(overrides, "TextField31602486")}
         ></TextField>
         <Divider
@@ -142,9 +110,6 @@ export default function CreateNote(props) {
           isDisabled={false}
           variation="primary"
           children="Save"
-          onClick={() => {
-            buttonOnClick();
-          }}
           {...getOverrideProps(overrides, "Button")}
         ></Button>
       </Flex>
