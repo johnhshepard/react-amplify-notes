@@ -21,7 +21,7 @@ export default function NavBar(props) {
       position="relative"
       boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       padding="24px 32px 24px 32px"
-      backgroundColor="rgba(4,125,149,1)"
+      backgroundColor="rgba(0,25,77,1)"
       {...getOverrideProps(overrides, "NavBar")}
       {...rest}
     >
@@ -57,8 +57,8 @@ export default function NavBar(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Notes"
-          {...getOverrideProps(overrides, "Notes")}
+          children="John's Notes App"
+          {...getOverrideProps(overrides, "John's Notes App")}
         ></Text>
       </Flex>
       <Flex
@@ -76,7 +76,7 @@ export default function NavBar(props) {
         <Button
           width="unset"
           height="unset"
-          border="1px SOLID rgba(255,255,255,1)"
+          border="1px SOLID rgba(203,67,67,1)"
           shrink="0"
           size="default"
           isDisabled={false}
@@ -87,7 +87,7 @@ export default function NavBar(props) {
         <Button
           width="unset"
           height="unset"
-          border="1px SOLID rgba(255,255,255,1)"
+          border="1px SOLID rgba(203,67,67,1)"
           shrink="0"
           size="default"
           isDisabled={false}

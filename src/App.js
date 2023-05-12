@@ -1,11 +1,16 @@
 import './App.css';
-import { CreateNote, NavBar, NoteUICollection, UpdateNote, NoteCreateForm } from './ui-components';
+import { NavBar, NoteUICollection, UpdateNote, NoteCreateForm, NoteUpdateForm } from './ui-components';
 import { useState } from 'react'
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import { DataStore } from 'aws-amplify'; 
+import { DataStore, Auth } from 'aws-amplify'; 
 
 const withAuthenticatorOptions = {
   hideSignUp: true
+}
+
+const checkUser = async () => {
+  let user = await Auth.currentAuthenticatedUser();  
+  alert(JSON.stringify(user))
 }
 
 function App({ signOut }) {
@@ -28,9 +33,7 @@ function App({ signOut }) {
         }}
         />
       <div className='container'>
-        <NoteCreateForm />
-      </div> 
-      <div className='container'>
+      <button onClick={()=>checkUser()}>Who Am I</button>
       <NoteUICollection overrideItems={({ item, idx }) => {
         return {
           overrides: {
@@ -48,10 +51,20 @@ function App({ signOut }) {
       </div>
       {/* // TODO - Form needs to hide after submit
       // TODO - User needs a notifcation that the submit was successful.
-    // TODO - Form needs to be cleared of data on launch.  
-    // TODO - Private Authorization doesn't work correctly.
+    // TODO - Form needs to be cleared of data on launch. This happens on default forms. How can I use those in the modals?  
     */ }
       <div className='modal' style={{display: showCreateModal === false && 'none'}}>
+        <NoteCreateForm onSuccess={() => {
+            setShowCreateModal(false)
+          }}
+            overrides={{
+              CancelButton: {
+                onClick: () => setShowCreateModal(false)
+              }
+            }}
+          />
+      </div> 
+      {/* <div className='modal' style={{display: showCreateModal === false && 'none'}}>
         <CreateNote 
           onSuccess={() => {
             setShowCreateModal(false)
@@ -62,14 +75,14 @@ function App({ signOut }) {
               onClick: () => setShowCreateModal(false)
             }
           }}
-        />
-      </div>
+        /> 
+      </div>*/}
+      
       <div className='modal' style={{display: showUpdateModal === false && 'none'}}>
-        <UpdateNote 
-          note={updateNote} 
+        <NoteUpdateForm 
+          note={updateNote}
           overrides={{
-            MyIcon: {
-              as: 'button',
+            CancelButton: {
               onClick: () => setShowUpdateModal(false)
             }
           }}

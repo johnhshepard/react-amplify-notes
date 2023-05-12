@@ -12,5 +12,5 @@ export { default as UpdateNote } from "./UpdateNote";
 export { default as CreateNote } from "./CreateNote";
 export { default as NoteUICollection } from "./NoteUICollection";
 export { default as studioTheme } from "./studioTheme";
-export { default as NoteCreateForm } from "./NoteCreateForm";
 export { default as NoteUpdateForm } from "./NoteUpdateForm";
+export { default as NoteCreateForm } from "./NoteCreateForm";

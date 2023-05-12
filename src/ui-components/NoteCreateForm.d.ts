@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
@@ -24,7 +24,7 @@ export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes
 export declare type NoteCreateFormOverridesProps = {
     NoteCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     title?: PrimitiveOverrideProps<TextFieldProps>;
-    text?: PrimitiveOverrideProps<TextFieldProps>;
+    text?: PrimitiveOverrideProps<TextAreaFieldProps>;
 } & EscapeHatchProps;
 export declare type NoteCreateFormProps = React.PropsWithChildren<{
     overrides?: NoteCreateFormOverridesProps | undefined | null;
@@ -33,6 +33,7 @@ export declare type NoteCreateFormProps = React.PropsWithChildren<{
     onSubmit?: (fields: NoteCreateFormInputValues) => NoteCreateFormInputValues;
     onSuccess?: (fields: NoteCreateFormInputValues) => void;
     onError?: (fields: NoteCreateFormInputValues, errorMessage: string) => void;
+    onCancel?: () => void;
     onChange?: (fields: NoteCreateFormInputValues) => NoteCreateFormInputValues;
     onValidate?: NoteCreateFormValidationValues;
 } & React.CSSProperties>;

@@ -35,6 +35,7 @@ export declare type NoteUpdateFormProps = React.PropsWithChildren<{
     onSubmit?: (fields: NoteUpdateFormInputValues) => NoteUpdateFormInputValues;
     onSuccess?: (fields: NoteUpdateFormInputValues) => void;
     onError?: (fields: NoteUpdateFormInputValues, errorMessage: string) => void;
+    onCancel?: () => void;
     onChange?: (fields: NoteUpdateFormInputValues) => NoteUpdateFormInputValues;
     onValidate?: NoteUpdateFormValidationValues;
 } & React.CSSProperties>;
