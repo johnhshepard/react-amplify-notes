@@ -10,7 +10,7 @@ const withAuthenticatorOptions = {
 
 const checkUser = async () => {
   let user = await Auth.currentAuthenticatedUser();  
-  alert(JSON.stringify(user))
+  alert(user.username)
 }
 
 function App({ signOut }) {
