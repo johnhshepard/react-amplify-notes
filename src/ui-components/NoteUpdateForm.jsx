@@ -6,7 +6,13 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
+import {
+  Button,
+  Flex,
+  Grid,
+  TextAreaField,
+  TextField,
+} from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Note } from "../models";
 import { fetchByPath, validateField } from "./utils";
@@ -153,7 +159,7 @@ export default function NoteUpdateForm(props) {
         hasError={errors.title?.hasError}
         {...getOverrideProps(overrides, "title")}
       ></TextField>
-      <TextField
+      <TextAreaField
         label="Text"
         isRequired={false}
         isReadOnly={false}
@@ -177,7 +183,7 @@ export default function NoteUpdateForm(props) {
         errorMessage={errors.text?.errorMessage}
         hasError={errors.text?.hasError}
         {...getOverrideProps(overrides, "text")}
-      ></TextField>
+      ></TextAreaField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}
