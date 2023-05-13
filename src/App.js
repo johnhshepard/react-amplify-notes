@@ -1,16 +1,13 @@
 import './App.css';
-import { NavBar, NoteUICollection, UpdateNote, NoteCreateForm, NoteUpdateForm } from './ui-components';
+import { NavBar, NoteUICollection, NoteCreateForm, NoteUpdateForm } from './ui-components';
 import { useState } from 'react'
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import { DataStore, Auth } from 'aws-amplify'; 
+import { DataStore, Hub } from 'aws-amplify'; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const withAuthenticatorOptions = {
   hideSignUp: true
-}
-
-const checkUser = async () => {
-  let user = await Auth.currentAuthenticatedUser();  
-  alert(user.username)
 }
 
 function App({ signOut }) {
@@ -18,6 +15,12 @@ function App({ signOut }) {
   const [showUpdateModal, setShowUpdateModal] = useState(false)
   const [updateNote, setUpdateNote] = useState()
   
+  Hub.listen("ui", (capsule) => {
+    if (capsule.payload.event === "actions:datastore:delete:finished") {
+      toast.success("Note Deleted")
+    }
+  });
+
   return (
     <>
       <NavBar 
@@ -33,12 +36,10 @@ function App({ signOut }) {
         }}
         />
       <div className='container'>
-      <button onClick={()=>checkUser()}>Who Am I</button>
       <NoteUICollection overrideItems={({ item, idx }) => {
         return {
           overrides: {
             Vector31472745: {
-              
               onClick: () => {
                 setShowUpdateModal(true)
                 setUpdateNote(item)
@@ -74,7 +75,8 @@ function App({ signOut }) {
           onCancel={() => setShowUpdateModal(false)}
           onError={(error) => {console.log(error)}}
         />
-      </div>   
+      </div>
+      <ToastContainer position="bottom-right" />   
     </>
   );
 }
