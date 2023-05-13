@@ -53,14 +53,13 @@ function App({ signOut }) {
         <NoteCreateForm 
           onSuccess={() => {setShowCreateModal(false)}}
           onCancel={() => {setShowCreateModal(false)}}
-          />
+          onError={(error) => {console.log(error)}}
+         />
       </div>     
       <div className='modal' style={{display: showUpdateModal === false && 'none'}}>
         <NoteUpdateForm 
           note={updateNote}
-          onSuccess={() => {
-            setShowUpdateModal(false)
-          }}
+          onSuccess={() => {setShowUpdateModal(false)}}
           onSubmit={(fields) => {
             const updatedFields = {}
             Object.keys(fields).forEach(key => {
@@ -72,9 +71,8 @@ function App({ signOut }) {
             })
             return updatedFields
           }}
-          onCancel={
-            () => setShowUpdateModal(false)
-          }
+          onCancel={() => setShowUpdateModal(false)}
+          onError={(error) => {console.log(error)}}
         />
       </div>   
     </>
