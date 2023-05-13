@@ -49,43 +49,32 @@ function App({ signOut }) {
       }}
       />
       </div>
-      {/* // TODO - Form needs to hide after submit
-      // TODO - User needs a notifcation that the submit was successful.
-    // TODO - Form needs to be cleared of data on launch. This happens on default forms. How can I use those in the modals?  
-    */ }
       <div className='modal' style={{display: showCreateModal === false && 'none'}}>
-        <NoteCreateForm onSuccess={() => {
-            setShowCreateModal(false)
-          }}
-            overrides={{
-              CancelButton: {
-                onClick: () => setShowCreateModal(false)
-              }
-            }}
+        <NoteCreateForm 
+          onSuccess={() => {setShowCreateModal(false)}}
+          onCancel={() => {setShowCreateModal(false)}}
           />
-      </div> 
-      {/* <div className='modal' style={{display: showCreateModal === false && 'none'}}>
-        <CreateNote 
-          onSuccess={() => {
-            setShowCreateModal(false)
-          }}
-          overrides={{
-            MyIcon: {
-              as: 'button',
-              onClick: () => setShowCreateModal(false)
-            }
-          }}
-        /> 
-      </div>*/}
-      
+      </div>     
       <div className='modal' style={{display: showUpdateModal === false && 'none'}}>
         <NoteUpdateForm 
           note={updateNote}
-          overrides={{
-            CancelButton: {
-              onClick: () => setShowUpdateModal(false)
-            }
+          onSuccess={() => {
+            setShowUpdateModal(false)
           }}
+          onSubmit={(fields) => {
+            const updatedFields = {}
+            Object.keys(fields).forEach(key => {
+                if (typeof fields[key] === 'string') {
+                    updatedFields[key] = fields[key].trim()
+                } else {
+                    updatedFields[key] = fields[key]
+                }
+            })
+            return updatedFields
+          }}
+          onCancel={
+            () => setShowUpdateModal(false)
+          }
         />
       </div>   
     </>
